@@ -12,8 +12,9 @@ Rust のインストール手順は筆者と同じコマンドで実行できた
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 . "$HOME/.cargo/env"
 rustup --version
+```
 
-ビルドに必要なツールのインストール
+## ビルドに必要なツールのインストール
 筆者は Debian 系で
 
 sudo apt install -y build-essential qemu-system-x86 netcat-openbsd
@@ -25,3 +26,20 @@ xcode-select --install
 # 以降必要に応じて Homebrew:
 # brew install qemu        # x86_64 エミュレーション
 # brew install nasm        # アセンブラ
+
+## GNU Make を最新版へ更新
+
+```bash
+# 1. 現在のバージョン確認
+make --version          # => GNU Make 3.81 …
+
+# 2. Homebrew で最新版をインストール（インストール名は gmake）
+brew install make
+gmake --version         # => GNU Make 4.4.1 …
+
+# 3. gmake を make として使うエイリアスを設定（zsh）
+echo 'alias make=gmake' >> ~/.zshrc
+source ~/.zshrc
+
+# 4. 新しい make を確認
+make --version          # => GNU Make 4.4.1 …
