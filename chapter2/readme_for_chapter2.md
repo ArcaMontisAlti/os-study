@@ -25,8 +25,9 @@ sudo apt install -y build-essential qemu-system-x86 netcat-openbsd
 `$ xcode-select --install`
 
 以降必要に応じて Homebrew:
+
 `$ brew install qemu`   
-     
+
 `$ brew install nasm`       
 
 ## GNU Make を最新版へ更新
