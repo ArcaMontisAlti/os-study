@@ -58,4 +58,4 @@ make --version          # => GNU Make 4.4.1 …
 
 `$ nightly-2024-01-01-aarch64-apple-darwin (overridden by '/Users/takayamanoa/os-study/repo/wasabi/rust-toolchain.toml')`
 
-になっている. 特に問題はなかった.echo '/repo/wasabi' >> .gitignore
+になっている. 特に問題はなかった.
