@@ -1,5 +1,5 @@
-# Chapter 2: Development Environment Setup  
-**macOS (M3 Pro) 上で Rust 開発環境を整える**
+# Chapter 2: OS のない世界でプログラムを書く 
+**macOS (M3 Pro) 上で行う上で, 教科書通りに運ばなかった部分に対し, どう対処したかを記載しています**
 
 ---
 
