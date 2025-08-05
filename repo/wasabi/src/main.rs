@@ -121,6 +121,7 @@ fn efi_main(_image_handle: EfiHandle, efi_system_table: &EfiSystemTable) {
     loop {}
 }
 
+
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
