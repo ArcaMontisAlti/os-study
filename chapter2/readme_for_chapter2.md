@@ -19,7 +19,8 @@ $ rustup --version
 ## ビルドに必要なツールのインストール
 筆者は Debian 系で
 
-sudo apt install -y build-essential qemu-system-x86 netcat-openbsd
+`$ sudo apt install -y build-essential qemu-system-x86 netcat-openbsd`
+
 を実行しているが, macOS では次で代用できた.
 
 `$ xcode-select --install`
