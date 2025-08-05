@@ -3,7 +3,7 @@
 
 ---
 
-## p. 34 – 36：開発環境の差分
+## p. 34 – 36：開発環境のセットアップの差異
 
 筆者は Debian / x86_64 環境だが、私は **macOS (M3 Pro, arm64)** で作業する。  
 Rust のインストール手順は筆者と同じコマンドで実行できた：
@@ -46,3 +46,16 @@ source ~/.zshrc
 
 # 4. 新しい make を確認
 make --version          # => GNU Make 4.4.1 …
+```
+
+## p.39 のRustツールチェインのバージョンを固定する　の部分の差異
+
+私の方は,
+
+`$ rustup show active-toolchain`
+
+をすると
+
+`$ nightly-2024-01-01-aarch64-apple-darwin (overridden by '/Users/takayamanoa/os-study/repo/wasabi/rust-toolchain.toml')`
+
+になっている. 特に問題はなかった.
