@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    // ワークスペースルート (＝ファイル置いた場所) からの相対パス
+    "rust-analyzer.linkedProjects": [
+      "repo/wasabi/Cargo.toml"
+      // 他プロジェクトの Cargo.toml も同様に追加
+      // "repo/another-crate/Cargo.toml"
+    ]
+  }
+}
