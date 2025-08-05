@@ -59,3 +59,11 @@ make --version          # => GNU Make 4.4.1 …
 `$ nightly-2024-01-01-aarch64-apple-darwin (overridden by '/Users/takayamanoa/os-study/repo/wasabi/rust-toolchain.toml')`
 
 になっている. 特に問題はなかった.
+
+## p. 45 の Rust ツールチェインバージョン固定の差異
+
+私の環境では以下のように出力されるため、本の手順通りにバージョン固定が適用されている：
+
+```bash
+$ rustup show active-toolchain
+nightly-2024-01-01-aarch64-apple-darwin (overridden by '/Users/takayamanoa/os-study/repo/wasabi/rust-toolchain.toml')
