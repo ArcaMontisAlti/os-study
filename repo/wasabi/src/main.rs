@@ -121,8 +121,7 @@ fn efi_main(_image_handle: EfiHandle, efi_system_table: &EfiSystemTable) {
     loop {}
 }
 
-
-#[panic_handler]
+#[panic_handler] // panic_handler を定義することで、パニック時の挙動を定義する
 fn panic(_info: &PanicInfo) -> ! {
-    loop {}
+    loop {} // パニック時は無限ループに入る
 }
