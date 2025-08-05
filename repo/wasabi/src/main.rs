@@ -2,6 +2,7 @@
 #! [no_main] // no_main を使うための宣言
 #! [feature(offset_of)]
 // core クレート内にある型を使うために use 宣言を行う
+use core::arch::asm;
 use core::mem::offset_of;
 use core::mem::size_of;
 use core::panic::PanicInfo;
@@ -102,6 +103,10 @@ fn locate_graphic_protocol<'a>(
     Ok(unsafe { &*graphic_output_protocol })
 }
 
+pub fn hlt() {
+    unsafe { asm!("hlt") }
+}
+
 #[no_mangle] // p.56 より, これをつけることで、コンパイラが関数名を変更しないようにする
 fn efi_main(_image_handle: EfiHandle, efi_system_table: &EfiSystemTable) {
     let efi_graphics_output_protocol =
@@ -115,13 +120,17 @@ fn efi_main(_image_handle: EfiHandle, efi_system_table: &EfiSystemTable) {
         )
     };
     for e in vram {
-        *e = 0xffffff; // 白色で画面を塗りつぶす
+        *e = 0x0000ff; // 白色で画面を塗りつぶす
     }
     // println!("Hello, world!");
-    loop {}
+    loop {
+        hlt() // CPU を割り込みが来るまで休ませる
+    }
 }
 
 #[panic_handler] // panic_handler を定義することで、パニック時の挙動を定義する
 fn panic(_info: &PanicInfo) -> ! {
-    loop {} // パニック時は無限ループに入る
+    loop {
+        hlt() // パニック時も CPU を休ませる
+    }
 }
