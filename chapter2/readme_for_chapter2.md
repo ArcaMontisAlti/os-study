@@ -67,3 +67,16 @@ make --version          # => GNU Make 4.4.1 …
 ```bash
 $ rustup show active-toolchain
 nightly-2024-01-01-aarch64-apple-darwin (overridden by '/Users/takayamanoa/os-study/repo/wasabi/rust-toolchain.toml')
+```
+
+## p.59 \~ 67 フレームバッファに何か描く
+
+```rust
+#[panic_handler] // panic_handler を定義することで、パニック時の挙動を定義する
+fn panic(_info: &PanicInfo) -> ! {
+    loop {} // パニック時は無限ループに入る
+}
+```
+
+> **私の環境（rust-analyzer導入済）では赤線が引かれてしまうのだが, コンパイル・実行には影響がなかった.**
+> 消すとコンパイルエラーになるため, 必ず残して使う.
