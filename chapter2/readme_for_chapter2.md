@@ -5,7 +5,7 @@
 
 ## p. 34 – 36：開発環境のセットアップの差異
 
-筆者は Debian / x86_64 環境だが、私は **macOS (M3 Pro, arm64)** で作業する。  
+筆者は Debian / x86_64 環境だが, 私は **macOS (M3 Pro, arm64)** で作業する.
 Rust のインストール手順は筆者と同じコマンドで実行できた：
 
 ```bash
@@ -20,7 +20,7 @@ $ rustup --version
 筆者は Debian 系で
 
 sudo apt install -y build-essential qemu-system-x86 netcat-openbsd
-を実行しているが、macOS では次で代用できた。
+を実行しているが, macOS では次で代用できた.
 
 `$ xcode-select --install`
 
@@ -62,7 +62,7 @@ make --version          # => GNU Make 4.4.1 …
 
 ## p. 45 の Rust ツールチェインバージョン固定の差異
 
-私の環境では以下のように出力されるため、本の手順通りにバージョン固定が適用されている：
+私の環境では以下のように出力されるが, 本の手順通りにバージョン固定が適用されている：
 
 ```bash
 $ rustup show active-toolchain
