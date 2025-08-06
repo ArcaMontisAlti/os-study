@@ -133,17 +133,44 @@ fn efi_main(_image_handle: EfiHandle, efi_system_table: &EfiSystemTable) {
         let _ = draw_line(&mut vram, 0xff00ff, cx, cy, rect_size, i);
         let _ = draw_line(&mut vram, 0xffffff, cx, cy, i, rect_size);
     }
+    let font_a = "
+........
+...**...
+...**...
+...**...
+...**...
+..*..*..
+..*..*..
+..*..*..
+..*..*..
+.******.
+.*....*.
+.*....*.
+.*....*.
+***..***
+........
+........
+";
+    for (y, row) in font_a.trim().split('\n').enumerate() {
+        for (x, pixel) in row.chars().enumerate() {
+            let color = match pixel {
+                '*' => 0xffffff,
+                _ => continue,
+            };
+            let _ = draw_point(&mut vram, color, x as i64, y as i64);
+        }
+    }
     // println!("Hello, world!");
     loop {
         hlt() // CPU を割り込みが来るまで休ませる
     }
-}
 
 #[panic_handler] // panic_handler を定義することで、パニック時の挙動を定義する
 fn panic(_info: &PanicInfo) -> ! {
     loop {
         hlt() // パニック時も CPU を休ませる
     }
+}
 }
 
 trait Bitmap {
