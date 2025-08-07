@@ -4,10 +4,13 @@
 // core クレート内にある型を使うために use 宣言を行う
 use core::arch::asm;
 use core::cmp::min; // 四角形を描画するために追加した
+use core::fmt; // fmt::Write を使うために追加した
+use core::fmt::Write; // 文字列を描画するために追加した
 use core::mem::offset_of;
 use core::mem::size_of;
 use core::panic::PanicInfo;
 use core::ptr::null_mut;
+use core::writeln; // writeln! マクロを使うために追加した
 
 type EfiVoid = u8;
 type EfiHandle = u64;
@@ -137,8 +140,12 @@ fn efi_main(_image_handle: EfiHandle, efi_system_table: &EfiSystemTable) {
     for (i, c) in "ABCDEF".chars().enumerate() {
         draw_font_fg(&mut vram, i as i64 * 16 + 256, i as i64 * 16, 0xffffff, c)
     }
-    draw_str_fg(&mut vram, 256, 256, 0xffffff, "Hello, world!");
-    // println!("Hello, world!");
+    draw_str_fg(&mut vram, 256, 256, 0xffffff, "Hello, World!");
+    let mut w = VramTextWriter::new(&mut vram);
+    for i in 0..4 {
+        writeln!(w, "i").unwrap();
+    }
+    // println!("Hello, world");
     loop {
         hlt() // CPU を割り込みが来るまで休ませる
     }
@@ -358,5 +365,20 @@ fn draw_font_fg<T: Bitmap>(buf: &mut T, x: i64, y: i64, color: u32, c: char) {
 fn draw_str_fg<T: Bitmap>(buf: &mut T, x:i64, y:i64, color: u32, s: &str) {
     for (i, c) in s.chars().enumerate() {
         draw_font_fg(buf,x + i as i64 * 8, y, color, c)
+    }
+}
+
+struct VramTextWriter<'a> {
+    vram: &'a mut VramBufferInfo,
+}
+impl<'a> VramTextWriter<'a> {
+    fn new(vram: &'a mut VramBufferInfo) -> Self {
+        Self { vram }
+    }
+}
+impl fmt::Write for VramTextWriter<'_> {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        draw_str_fg(self.vram, 0, 0, 0xffffff, s);
+        Ok(())
     }
 }
