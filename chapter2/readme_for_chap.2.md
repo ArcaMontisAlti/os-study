@@ -1,11 +1,12 @@
 # Chapter 2: OS のない世界でプログラムを書く 
-**macOS (M3 Pro) 上で行う上で, 教科書通りに運ばなかった部分に対し, どう対処したかを記載しています**
+**macOS (M3 Pro) 上で行う上で, 教科書通りに運ばなかった部分に対し私がどう対処したかを記載しています**
 
 ---
 
 ## p. 34 – 36：開発環境のセットアップ
 
 筆者は Debian / x86_64 環境だが, 私は **macOS (M3 Pro, arm64)** で作業する.
+
 Rust のインストール手順は筆者と同じコマンドで実行できた：
 
 ```bash
@@ -21,7 +22,7 @@ $ rustup --version
 
 `$ sudo apt install -y build-essential qemu-system-x86 netcat-openbsd`
 
-を実行しているが, macOS では次で代用できた.
+を実行しているが, **私はできなかった.** その代わり, macOS では次で解決できた.
 
 `$ xcode-select --install`
 
@@ -57,7 +58,7 @@ make --version          # => GNU Make 4.4.1 …
 
 をすると
 
-`$ nightly-2024-01-01-aarch64-apple-darwin (overridden by '/Users/takayamanoa/os-study/repo/wasabi/rust-toolchain.toml')`
+`$ nightly-2024-01-01-aarch64-apple-darwin(overridden by '/Users/takayamanoa/os-study/repo/wasabi/rust-toolchain.toml')`
 
 になっている. 特に問題はなかった.
 
@@ -81,3 +82,5 @@ fn panic(_info: &PanicInfo) -> ! {
 
 > **私の環境（rust-analyzer導入済）では赤線が引かれてしまうのだが, コンパイル・実行には影響がなかった.**
 > 消すとコンパイルエラーになるため, 必ず残して使う.
+
+> 2025-08-08 追記: 本書を読み進めていくうちに, 上記のエラーがエラーでなくなった.
