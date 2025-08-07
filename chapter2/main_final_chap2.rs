@@ -1,3 +1,6 @@
+// 第二章時点での Rust のコード
+// このコードは UEFI の環境で動作することを前提としています
+
 #![no_std] // no_std を使うための宣言
 #![no_main] // no_main を使うための宣言
 #![feature(offset_of)]
