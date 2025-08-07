@@ -1,13 +1,13 @@
-use create::graphics::draw_font_fg;
-use create::graphics::Bitmap;
-use create::result::Result;
+use crate::graphics::draw_font_fg;
+use crate::graphics::Bitmap;
+use crate::result::Result;
 use core::fmt;
 use core::mem::offset_of;
 use core::mem::size_of;
 use core::ptr::null_mut;
 
 type EfiVoid = u8;
-type EfiHandle = u64;
+pub type EfiHandle = u64;
 
 #[repr(C)]
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
@@ -28,7 +28,7 @@ const EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID: EfiGuid = EfiGuid {
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 #[must_use]
 #[repr(u64)]
-enum EfiStatus {
+pub enum EfiStatus {
     Success = 0,
 }
 
@@ -142,7 +142,7 @@ pub struct EfiBootServicesTable {
     ) -> EfiStatus,
 }
 impl EfiBootServicesTable {
-    fn get_memory_map(&self, map: &mut MemoryMapHolder) -> EfiStatus {
+    pub fn get_memory_map(&self, map: &mut MemoryMapHolder) -> EfiStatus {
         (self.get_memory_map)(
             &mut map.memory_map_size,
             map.memory_map_buffer.as_mut_ptr(),
@@ -257,7 +257,7 @@ pub struct VramTextWriter<'a> {
     cursor_y: i64,
 }
 impl<'a> VramTextWriter<'a> {
-    fn new(vram: &'a mut VramBufferInfo) -> Self {
+    pub fn new(vram: &'a mut VramBufferInfo) -> Self {
         Self {
             vram,
             cursor_x: 0,

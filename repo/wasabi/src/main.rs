@@ -1,3 +1,5 @@
+#![no_std]
+#![no_main]
 #![feature(offset_of)]
 use core::arch::asm;
 use core::fmt::Write; 
@@ -16,7 +18,7 @@ use wasabi::uefi::EfiHandle;
 use wasabi::uefi::EfiMemoryType;
 use wasabi::uefi::EfiSystemTable;
 use wasabi::uefi::MemoryMapHolder;
-use wasabi::uefi::VramBufferInfo;
+use wasabi::uefi::VramTextWriter;
 // ここまで
 
 pub fn hlt() {

@@ -1,4 +1,4 @@
-use create::result::Result;
+use crate::result::Result;
 use core::cmp::min;
 
 pub trait Bitmap {
@@ -172,6 +172,18 @@ pub fn draw_font_fg<T: Bitmap>(
                 let _ = draw_point(buf, color, x + dx as i64, y + dy as i64);
             }
         }
+    }
+}
+
+pub fn draw_str_fg<T: Bitmap>(
+    buf: &mut T,
+    x: i64,
+    y: i64,
+    color: u32,
+    s: &str,
+) {
+    for (i, c) in s.chars().enumerate() {
+        draw_font_fg(buf, x + i as i64 * 8, y, color, c)
     }
 }
 
