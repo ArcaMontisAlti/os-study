@@ -1,7 +1,7 @@
 #![no_std]
 #![no_main]
 #![feature(offset_of)]
-use core::arch::asm;
+
 use core::fmt::Write; 
 use core::panic::PanicInfo;
 use core::writeln;
@@ -9,6 +9,11 @@ use core::writeln;
 use wasabi::graphics::draw_test_pattern;
 use wasabi::graphics::fill_rect;
 use wasabi::graphics::Bitmap;
+// ここまで
+
+// ここからtest_runner を使うための宣言
+use wasabi::qemu::exit_qemu;
+use wasabi::qemu::QemuExitCode;
 // ここまで 
 
 // ここから wasabiモジュールのうち, UEFI関連のものをインポート
@@ -21,9 +26,7 @@ use wasabi::uefi::MemoryMapHolder;
 use wasabi::uefi::VramTextWriter;
 // ここまで
 
-pub fn hlt() {
-    unsafe { asm!("hlt") }
-}
+use wasabi::x86::hlt;
 
 #[no_mangle] // p.56 より, これをつけることで、コンパイラが関数名を変更しないようにする
 fn efi_main(image_handle: EfiHandle, efi_system_table: &EfiSystemTable) {
@@ -67,9 +70,7 @@ fn efi_main(image_handle: EfiHandle, efi_system_table: &EfiSystemTable) {
 
 #[panic_handler] // panic_handler を定義することで、パニック時の挙動を定義する
 fn panic(_info: &PanicInfo) -> ! {
-    loop {
-        hlt() // パニック時も CPU を休ませる
-    }
+    exit_qemu(QemuExitCode::Fail);
 }
 
 }
